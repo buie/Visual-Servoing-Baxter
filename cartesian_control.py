@@ -102,10 +102,7 @@ def ik_test(limb):
         # Format solution into Limb API-compatible dictionary
         limb_joints = dict(zip(resp.joints[0].name, resp.joints[0].position))
 
-        TODO: WRITE LIMJOINTS TO THE BAXTER
-
-
-
+        robot.left_limb.positionCommand(resp.joints[0].position)
 
         print "Response Message:\n", resp
     else:
@@ -123,7 +120,7 @@ def main():
     arg_fmt = argparse.RawDescriptionHelpFormatter
     parser = argparse.ArgumentParser(formatter_class=arg_fmt,
                                      description=main.__doc__)
-    robot.setKlamptModel("/home/hauser/gitlibs/Klampt/data/robots/baxter_col.rob")
+    #lrobot.setKlamptModel("/home/hauser/gitlibs/Klampt/data/robots/baxter_col.rob") #update
     parser.add_argument(
         '-l', '--limb', choices=['left', 'right'], required=True,
         help="the limb to test"
