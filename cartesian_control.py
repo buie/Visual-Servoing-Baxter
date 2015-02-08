@@ -14,7 +14,7 @@ from geometry_msgs.msg import (
 
 from std_msgs.msg import Header
 
-from ebolabot import robot
+from ebolabot import *
 
 from baxter_core_msgs.srv import (
     SolvePositionIK,
