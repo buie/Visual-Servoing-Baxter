@@ -123,6 +123,7 @@ def main():
     arg_fmt = argparse.RawDescriptionHelpFormatter
     parser = argparse.ArgumentParser(formatter_class=arg_fmt,
                                      description=main.__doc__)
+    robot.setKlamptModel("/home/hauser/gitlibs/Klampt/data/robots/baxter_col.rob")
     parser.add_argument(
         '-l', '--limb', choices=['left', 'right'], required=True,
         help="the limb to test"
@@ -155,6 +156,6 @@ def main():
             rightz = rightz + 0.05
             ik_test(args.limb)
         else:
-               print "Key pressed is " + char
+            print "Key pressed is " + char ". Not a command."
 
 main()
