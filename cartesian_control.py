@@ -1,4 +1,5 @@
 import time
+import klampt
 import argparse
 import struct
 import sys
@@ -13,18 +14,20 @@ from geometry_msgs.msg import (
 
 from std_msgs.msg import Header
 
+from ebolabot import robot
+
 from baxter_core_msgs.srv import (
     SolvePositionIK,
     SolvePositionIKRequest,
 )
 
-rightx = 0.5;
-righty = 0.5;
-rightz = 0.5;
+rightx = 0.6569;
+righty = -0.8859;
+rightz = 0.03886;
 
-leftx = 0.5;
-lefty = 0.5;
-leftz = 0.5.
+leftx = 0.6575;
+lefty = 0.85198;
+leftz = 0.03883.
 
 def getch():
     import sys, tty, termios
@@ -96,12 +99,14 @@ def ik_test(limb):
                     ikreq.SEED_CURRENT: 'Current Joint Angles',
                     ikreq.SEED_NS_MAP: 'Nullspace Setpoints',
                    }.get(resp_seeds[0], 'None')
-        print("SUCCESS - Valid Joint Solution Found from Seed Type: %s" %
-              (seed_str,))
         # Format solution into Limb API-compatible dictionary
         limb_joints = dict(zip(resp.joints[0].name, resp.joints[0].position))
-        print "\nIK Joint Solution:\n", limb_joints
-        print "------------------"
+
+        TODO: WRITE LIMJOINTS TO THE BAXTER
+
+
+
+
         print "Response Message:\n", resp
     else:
         print("INVALID POSE - No Valid Joint Solution Found.")
@@ -132,23 +137,23 @@ def main():
     	       print "Done"
     	       break
         elif char == "w":
-            righty = righty + 0.1
-            return ik_test(args.limb)
+            righty = righty + 0.05
+            ik_test(args.limb)
         elif char == "s":
-            righty = righty - 0.1
-            return ik_test(args.limb)
+            righty = righty - 0.05
+            ik_test(args.limb)
         elif char == "a":
-            rightx = rightx - 0.1
-            return ik_test(args.limb)
+            rightx = rightx - 0.05
+            ik_test(args.limb)
         elif char == "d":
-            rightx = rightx + 0.1
-            return ik_test(args.limb)
+            rightx = rightx + 0.05
+            ik_test(args.limb)
         elif char == "z":
-            rightx = rightz - 0.1
-            return ik_test(args.limb)
+            rightz = rightz - 0.05
+            ik_test(args.limb)
         elif char == "q":
-            rightx = rightz + 0.1
-            return ik_test(args.limb)
+            rightz = rightz + 0.05
+            ik_test(args.limb)
         else:
                print "Key pressed is " + char
 
